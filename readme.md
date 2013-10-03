@@ -2,10 +2,10 @@
 
 ## Available methods:
 
-* stations
+# stations
 Takes a city name like `"San Francisco"` and returns an array of all the stations in that municipality
 
-* empty_stations
+# empty_stations
 Returns an array of all stations with 0 `availableBikes`
 
 * `empty?(station_id)`
