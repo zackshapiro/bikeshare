@@ -11,15 +11,15 @@ class BikeStatus
     response["stationBeanList"]
   end
 
-  def self.stations(*station_name)
-    station_name = station_name.first
-    
+  def self.stations(*city_name)
+    city_name = city_name.first
+
     list = BikeStatus.start
 
-    if station_name.nil?
+    if city_name.nil?
       stations = list
     else
-      stations = list.select { |station| station["landMark"] == "#{station_name}" }
+      stations = list.select { |station| station["landMark"] == "#{city_name}" }
     end
   end
 
