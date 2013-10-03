@@ -1,4 +1,6 @@
-### A Ruby gem for interacting with Bay Area Bike Share station and bike info
+# BikeShare
+A Ruby gem for interacting with Bay Area Bike Share stations and bike info
+* Created by [Zack Shapiro](http://twitter.com/zackshapiro) and [Patrick Traughber](http://twitter.com/ptraughber)
 
 ## Available methods:
 
@@ -14,5 +16,4 @@ Returns an array of all stations with 0 `availableBikes`
 ##### `.empty?(station_id)`
 Takes a `station_id` as an integer and retuns true or false based on the number of `availableBikes`
 
-* Created by [Zack Shapiro](http://twitter.com/zackshapiro) and [Patrick Traughber](http://twitter.com/ptraughber)
 * For more information, please go to the [Bay Area Bike Share website](http://bayareabikeshare.com)
