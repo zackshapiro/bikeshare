@@ -3,41 +3,61 @@ require 'open-uri'
 require 'debugger'
 require 'hashie'
 
-class BikeStatus
+class BikeShare
 
-  def self.start
-    # To do: Make this an init function
+  def initialize
     response = JSON.parse(open("http://bayareabikeshare.com/stations/json").read)
-    response["stationBeanList"]
+    @response = response["stationBeanList"]
   end
 
-  def self.stations(*city_name)
+  def get_last_station
+    @response.last["id"]
+  end
+
+  def stations(*city_name)
     city_name = city_name.first
 
-    list = BikeStatus.start
-
     if city_name.nil?
-      stations = list
+      stations = @response
     else
-      stations = list.select { |station| station["landMark"] == "#{city_name}" }
+      stations = @response.select { |station| station["landMark"] == "#{city_name}" }
     end
   end
 
-  def self.empty_stations
-    list = BikeStatus.start
-
-    list.select { |station| station["availableBikes"] == 0 }
+  def empty_stations
+    @response.select { |station| station["availableBikes"] == 0 }
   end
 
-  def self.empty?(station_id)
-    if station_id >= 2 && <= 77
-      list = BikeStatus.start
-      list = list.select { |station| station["id"] == station_id }
+  def empty?(station_id)
+    if station_id >= 2 && station_id <= get_last_station
+      station = @response.select { |station| station["id"] == station_id }
 
-      list[0]["availableBikes"] == 0 ? true : false
+      station.first["availableBikes"] == 0 ? true : false
     else
-      raise "Please enter a station id in between 2 and 77"
+      raise "Please enter a station id in between 2 and #{get_last_station}"
     end
+  end
+
+  def available_bikes(station_id)
+    if station_id >= 2 && station_id <= get_last_station
+      
+      station = @response.select { |station| station["id"] == station_id }
+      station.first["availableBikes"] 
+    else
+      raise "Please enter a station id in between 2 and #{get_last_station}"
+    end
+  end
+
+  # def self.get_total(station_id)
+  # end
+
+  # def self.get_percent_available(station_id)
+  # end
+
+  def offline_stations
+    list = @response.select { |station| station["statusKey"] == 0 }
+
+    list.empty? ? "There are no stations offline" : list
   end
 
 end

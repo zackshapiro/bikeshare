@@ -2,6 +2,10 @@
 A Ruby gem for interacting with Bay Area Bike Share stations and bike info
 * Created by [Zack Shapiro](http://twitter.com/zackshapiro) and [Patrick Traughber](http://twitter.com/ptraughber)
 
+## Installation
+
+*coming soon*
+
 ## Available methods:
 
 ##### `.start`
