@@ -50,7 +50,7 @@ class BikeShare
     end
   end
 
-  def total_bikes(station_id)
+  def total_docks(station_id)
     last_station = get_last_station
     if station_id >= 2 && station_id <= last_station
       

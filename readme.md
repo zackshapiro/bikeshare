@@ -43,8 +43,22 @@ response.available_bikes(2)
 Takes a `station_id` as an integer and returns the nunber of available bikes
 
 ```ruby
+response.total_docks(2)
+```
+Takes a `station_id` as an integer and returns the total number of docks at that station
+
+```ruby
+response.percent_available(2)
+```
+Takes a `station_id` as an integer and returns the percentage of bikes available, rounded two decimal places
+
+```ruby
 response.offline_stations
 ```
 Returns an array of stations currently offline
 
 * For more information, please go to the [Bay Area Bike Share website](http://bayareabikeshare.com)
+
+* If you would like to make changes or updates, please fork this, create a new branch with your changes and submit a pull request!
+
+* If you have any questions, I'm [@ZackShapiro](http://twitter.com/zackshapiro) on Twitter. Feel free to say hi!
