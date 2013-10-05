@@ -29,30 +29,52 @@ class BikeShare
   end
 
   def empty?(station_id)
-    if station_id >= 2 && station_id <= get_last_station
+    last_station = get_last_station
+    if station_id >= 2 && station_id <= last_station
       station = @response.select { |station| station["id"] == station_id }
 
       station.first["availableBikes"] == 0 ? true : false
     else
-      raise "Please enter a station id in between 2 and #{get_last_station}"
+      raise "Please enter a station id in between 2 and #{last_station}"
     end
   end
 
   def available_bikes(station_id)
-    if station_id >= 2 && station_id <= get_last_station
+    last_station = get_last_station
+    if station_id >= 2 && station_id <= last_station
       
       station = @response.select { |station| station["id"] == station_id }
-      station.first["availableBikes"] 
+      station.first["availableBikes"]
     else
-      raise "Please enter a station id in between 2 and #{get_last_station}"
+      raise "Please enter a station id in between 2 and #{last_station}"
     end
   end
 
-  # def self.get_total(station_id)
-  # end
+  def total_bikes(station_id)
+    last_station = get_last_station
+    if station_id >= 2 && station_id <= last_station
+      
+      station = @response.select { |station| station["id"] == station_id }
+      station.first["totalDocks"]
+    else
+      raise "Please enter a station id in between 2 and #{last_station}"
+    end
+  end
 
-  # def self.get_percent_available(station_id)
-  # end
+  def percent_available(station_id)
+    last_station = get_last_station
+    if station_id >= 2 && station_id <= last_station
+      station = @response.select { |station| station["id"] == station_id }
+
+      available = (station.first["availableBikes"]).to_f
+      total = (station.first["totalDocks"]).to_f
+
+      percentage = (available * 100.0) / total
+      percentage.round(2)
+    else 
+      raise "Please enter a station id in between 2 and #{last_station}"
+    end
+  end
 
   def offline_stations
     list = @response.select { |station| station["statusKey"] == 0 }
