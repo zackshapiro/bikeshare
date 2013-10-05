@@ -4,7 +4,15 @@ A Ruby gem for interacting with Bay Area Bike Share stations and bike info
 
 ## Installation
 
-*coming soon*
+```ruby
+gem install bikeshare
+```
+
+or 
+
+```ruby
+require 'bikeshare'
+```
 
 ## Available methods:
 
@@ -19,5 +27,11 @@ Returns an array of all stations with 0 `availableBikes`
 
 ##### `.empty?(station_id)`
 Takes a `station_id` as an integer and retuns true or false based on the number of `availableBikes`
+
+##### `.available_bikes(station_id)`
+Takes a `station_id` as an integer and returns the nunber of available bikes
+
+##### `.offline_stations`
+Returns an array of stations currently offline
 
 * For more information, please go to the [Bay Area Bike Share website](http://bayareabikeshare.com)
