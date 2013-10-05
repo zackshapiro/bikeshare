@@ -16,7 +16,10 @@ require 'bikeshare'
 
 ## Available methods:
 
-##### `.start`
+
+```ruby
+response = BikeShare.new
+```
 Returns the full JSON of stations available and their information
 
 ##### `.stations(city_name)`
