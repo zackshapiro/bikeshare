@@ -1,8 +1,3 @@
-require 'json'
-require 'open-uri'
-require 'debugger'
-require 'hashie'
-
 class BikeShare
 
   def initialize

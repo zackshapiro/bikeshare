@@ -4,15 +4,18 @@ A Ruby gem for interacting with Bay Area Bike Share stations and bike info
 
 ## Installation
 
+This is available as a RubyGem:
 ```ruby
 gem install bikeshare
 ```
 
-or 
-
 ```ruby
 require 'bikeshare'
 ```
+
+## To-Do:
+* Write tests (using rspec)
+* Submit to RubyGems
 
 ## Available methods:
 
