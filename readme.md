@@ -17,11 +17,21 @@ require 'bikeshare'
 
 ## Available methods:
 
-
 ```ruby
 response = BikeShare.new
 ```
 Returns the full JSON of stations available and their information
+
+
+```ruby
+response.get_last_station
+```
+Will return an integer of the last station in the system
+
+```ruby
+response.station_info(2)
+```
+Takes a `station_id` as an integer, returns an hash with that station's info
 
 ```ruby
 response.stations("San Francisco")
