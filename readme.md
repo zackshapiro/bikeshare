@@ -14,7 +14,7 @@ require 'bikeshare'
 ```
 
 ## To-Do:
-* Write tests (using rspec)
+* Complete test suite
 * Submit to RubyGems
 
 ## Available methods:
