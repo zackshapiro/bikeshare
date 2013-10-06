@@ -4,10 +4,6 @@ A Ruby gem for interacting with Bay Area Bike Share stations and bike info
 * Ongoing Bike safety, lanes, and infrastructure efforts by [Patrick Traughber](http://twitter.com/ptraughber) and friends.
 
 
-## To-Do:
-* Submit to RubyGems
-
-
 ## Installation
 
 This is available as a RubyGem:

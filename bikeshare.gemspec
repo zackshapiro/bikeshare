@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'bikeshare'
-  s.version     = '0.0.2'
-  s.date        = '2013-09-05'
+  s.version     = '0.0.3'
+  s.date        = '2013-09-06'
   s.summary     = "A Ruby wrapper for Bay Area Bike Share station information"
   s.description = "Ditto"
   s.authors     = ["Zack Shapiro"]
