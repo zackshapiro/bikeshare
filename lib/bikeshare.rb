@@ -37,6 +37,7 @@ class BikeShare
 
   def empty?(station_id)
     last_station = get_last_station
+
     if station_id >= 2 && station_id <= last_station
       station = @response.select { |station| station["id"] == station_id }
 
@@ -48,8 +49,8 @@ class BikeShare
 
   def available_bikes(station_id)
     last_station = get_last_station
-    if station_id >= 2 && station_id <= last_station
-      
+
+    if station_id >= 2 && station_id <= last_station 
       station = @response.select { |station| station["id"] == station_id }
       station.first["availableBikes"]
     else
@@ -59,8 +60,8 @@ class BikeShare
 
   def total_docks(station_id)
     last_station = get_last_station
+
     if station_id >= 2 && station_id <= last_station
-      
       station = @response.select { |station| station["id"] == station_id }
       station.first["totalDocks"]
     else
@@ -70,6 +71,7 @@ class BikeShare
 
   def percent_available(station_id)
     last_station = get_last_station
+
     if station_id >= 2 && station_id <= last_station
       station = @response.select { |station| station["id"] == station_id }
 
@@ -86,7 +88,7 @@ class BikeShare
   def offline_stations
     list = @response.select { |station| station["statusKey"] == 0 }
 
-    list.empty? ? "There are no stations offline" : list
+    list.empty? ? [] : list
   end
 
 end

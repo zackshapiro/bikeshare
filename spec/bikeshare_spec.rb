@@ -76,14 +76,78 @@ describe BikeShare do
     end
   end
 
-  describe "#empty?"
+  describe "#empty?" do
+    it "should raise an error with a bad station id" do
+      expect { @response.empty?(0) }.to raise_error
+    end
 
-  describe "#available_bikes"
+    it "should raise an error with no station id" do
+      expect { @response.empty? }.to raise_error
+    end
 
-  describe "#total_docks"
+    it "should return true if there are no bikes" do
+      BikeShare.any_instance.stub(:empty?).and_return true
+      @response.empty?(3).should be_true
+    end
 
-  describe "#percent_available"
+    it "should return false if there are 1 or more bikes" do
+      @response.empty?(3).should_not be_true
+    end
+  end
 
-  describe "offline_stations"
+  describe "#available_bikes" do
+    it "should raise an error with a bad station id" do
+      expect { @response.available_bikes(0) }.to raise_error
+    end
+
+    it "should raise an error with no station id" do
+      expect { @response.available_bikes }.to raise_error
+    end
+
+    it "should return the number of bikes at the station" do
+      @response.available_bikes(3).should >= 0
+    end
+  end
+
+  describe "#total_docks" do
+    it "should raise an error with a bad station id" do
+      expect { @response.total_docks(0) }.to raise_error
+    end
+
+    it "should raise an error with no station id" do
+      expect { @response.total_docks }.to raise_error
+    end
+
+    it "should return the number of docks at the station" do
+      @response.total_docks(8).should > 0
+    end
+  end
+
+  describe "#percent_available" do
+    it "should raise an error with a bad station id" do
+      expect { @response.percent_available(0) }.to raise_error
+    end
+
+    it "should raise an error with no station id" do
+      expect { @response.percent_available }.to raise_error
+    end
+
+    it "should return the percentage of bikes available" do
+      @response.percent_available(7).is_a? Float
+      @response.percent_available(7).should >= 0.0
+    end
+  end
+
+  describe "offline_stations" do
+    it "should return an empty array if no stations are offline" do
+      @response.offline_stations.should == []
+    end
+
+    it "should return an array of stations if one or more are offline" do
+      response = BikeShare.any_instance.stub(:offline_stations).and_return([{ :id => 2, :statusKey => 0}, { :id => 8, :statusKey => 0}])
+      response.is_a? Array
+      response.should_not be_nil
+    end
+  end
 
 end

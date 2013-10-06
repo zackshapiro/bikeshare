@@ -1,6 +1,12 @@
 # BikeShare
 A Ruby gem for interacting with Bay Area Bike Share stations and bike info
-* Created by [Zack Shapiro](http://twitter.com/zackshapiro) and [Patrick Traughber](http://twitter.com/ptraughber)
+* Created by [Zack Shapiro](http://twitter.com/zackshapiro). 
+* Ongoing Bike safety, lanes, and infrastructure efforts by [Patrick Traughber](http://twitter.com/ptraughber) and friends.
+
+
+## To-Do:
+* Submit to RubyGems
+
 
 ## Installation
 
@@ -12,10 +18,6 @@ gem install bikeshare
 ```ruby
 require 'bikeshare'
 ```
-
-## To-Do:
-* Complete test suite
-* Submit to RubyGems
 
 ## Available methods:
 
@@ -59,6 +61,7 @@ Takes a `station_id` as an integer and returns the percentage of bikes available
 response.offline_stations
 ```
 Returns an array of stations currently offline
+
 
 * For more information, please go to the [Bay Area Bike Share website](http://bayareabikeshare.com)
 
