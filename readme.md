@@ -71,6 +71,6 @@ Returns an array of stations currently offline
 
 * For more information, please go to the [Bay Area Bike Share website](http://bayareabikeshare.com)
 
-* If you would like to make changes or updates, please fork this, create a new branch with your changes and submit a pull request!
+* If you would like to contribute, fork this repo, create a new branch with your changes and submit a pull request!
 
-* If you have any questions, I'm [@ZackShapiro](http://twitter.com/zackshapiro) on Twitter. Feel free to say hi!
+* If you have any questions, I'm [@ZackShapiro](http://twitter.com/zackshapiro) on Twitter.
