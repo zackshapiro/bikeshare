@@ -9,6 +9,18 @@ class BikeShare
     @response.last["id"]
   end
 
+  def station_info(station_id)
+    last_station = get_last_station
+
+    if station_id >= 2 && station_id <= last_station
+      station = @response.select { |station| station["id"] == station_id } 
+      station.first
+    else
+      raise "Please enter a station id in between 2 and #{last_station}"
+    end
+
+  end
+
   def stations(*city_name)
     city_name = city_name.first
 
