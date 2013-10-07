@@ -95,6 +95,16 @@ describe BikeShare do
     end
   end
 
+  describe "#full?" do
+    it "should raise an error with a bad station id" do
+      expect { @response.full?(0) }.to raise_error
+    end
+
+    it "should raise an error with no station id" do
+      expect { @response.full? }.to raise_error
+    end
+  end
+
   describe "#available_bikes" do
     it "should raise an error with a bad station id" do
       expect { @response.available_bikes(0) }.to raise_error

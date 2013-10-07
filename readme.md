@@ -49,6 +49,11 @@ response.empty?(2)
 Takes a `station_id` as an integer and retuns true or false based on the number of `availableBikes`
 
 ```ruby
+response.full?(2)
+```
+Takes a `station_id` as an integer and retuns true or false based on the number of `availableBikes` and total docks at that station.
+
+```ruby
 response.available_bikes(2)
 ```
 Takes a `station_id` as an integer and returns the nunber of available bikes
