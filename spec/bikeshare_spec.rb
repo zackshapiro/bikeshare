@@ -26,7 +26,7 @@ describe BikeShare do
 
   describe "#station_info" do
     it "should return the information for a single station if valid" do
-      station = @response.station_info(2)
+      station = @response.station_info(9)
       station.should_not be_nil
       station.is_a? Hash
       station["id"] == 2

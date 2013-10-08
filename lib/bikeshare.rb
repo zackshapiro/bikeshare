@@ -9,16 +9,17 @@ class BikeShare
     @response.last["id"]
   end
 
-  def station_info(station_id)
-    last_station = get_last_station
+  def between?(min, max)
+    (min >= 2 && max <= get_last_station) ? true : false
+  end
 
-    if station_id >= 2 && station_id <= last_station
+  def station_info(station_id)
+    if station_id.between?(2, get_last_station)
       station = @response.select { |station| station["id"] == station_id } 
       station.first
     else
       raise "Please enter a station id in between 2 and #{last_station}"
     end
-
   end
 
   def stations(*city_name)
@@ -36,9 +37,7 @@ class BikeShare
   end
 
   def empty?(station_id)
-    last_station = get_last_station
-
-    if station_id >= 2 && station_id <= last_station
+    if station_id.between?(2, get_last_station)
       station = @response.select { |station| station["id"] == station_id }
 
       station.first["availableBikes"] == 0 ? true : false
@@ -48,9 +47,7 @@ class BikeShare
   end
 
   def full?(station_id)
-    last_station = get_last_station
-
-    if station_id >= 2 && station_id <= last_station
+    if station_id.between?(2, get_last_station)
       station = @response.select { |station| station["id"] == station_id }
 
       station.first["availableBikes"] == station.first["totalDocks"] ? true : false
@@ -60,10 +57,9 @@ class BikeShare
   end
 
   def available_bikes(station_id)
-    last_station = get_last_station
-
-    if station_id >= 2 && station_id <= last_station 
+    if station_id.between?(2, get_last_station)
       station = @response.select { |station| station["id"] == station_id }
+
       station.first["availableBikes"]
     else
       raise "Please enter a station id in between 2 and #{last_station}"
@@ -71,9 +67,7 @@ class BikeShare
   end
 
   def total_docks(station_id)
-    last_station = get_last_station
-
-    if station_id >= 2 && station_id <= last_station
+    if station_id.between?(2, get_last_station)
       station = @response.select { |station| station["id"] == station_id }
       station.first["totalDocks"]
     else
@@ -82,9 +76,7 @@ class BikeShare
   end
 
   def percent_available(station_id)
-    last_station = get_last_station
-
-    if station_id >= 2 && station_id <= last_station
+    if station_id.between?(2, get_last_station)
       station = @response.select { |station| station["id"] == station_id }
 
       available = (station.first["availableBikes"]).to_f
