@@ -24,9 +24,26 @@ describe BikeShare do
     end
   end
 
+  describe "#between?" do
+    it "should fail if the station_id is less than 2" do
+      station_id = 1
+      station_id.between?(2, @response.get_last_station).should_not be_true
+    end
+
+    it "should fail if the station_id is greater than the highest station number" do
+      station_id = 99
+      station_id.between?(2, @response.get_last_station).should_not be_true
+    end
+
+    it "should pass if the station_id is between or equal to 2 and the highest station number" do
+      station_id = 8
+      station_id.between?(2, @response.get_last_station).should be_true
+    end
+  end
+
   describe "#station_info" do
     it "should return the information for a single station if valid" do
-      station = @response.station_info(2)
+      station = @response.station_info(9)
       station.should_not be_nil
       station.is_a? Hash
       station["id"] == 2
