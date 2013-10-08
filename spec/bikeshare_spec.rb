@@ -24,20 +24,15 @@ describe BikeShare do
     end
   end
 
-  describe "#between?" do
-    it "should fail if the station_id is less than 2" do
+  describe "#between? exception" do
+    it "should throw an exception if the station ID is less than the first station ID" do
       station_id = 1
-      station_id.between?(2, @response.get_last_station).should_not be_true
+      expect { @response.station_info(station_id) }.to raise_error
     end
 
-    it "should fail if the station_id is greater than the highest station number" do
-      station_id = 99
-      station_id.between?(2, @response.get_last_station).should_not be_true
-    end
-
-    it "should pass if the station_id is between or equal to 2 and the highest station number" do
-      station_id = 8
-      station_id.between?(2, @response.get_last_station).should be_true
+    it "should throw an exception if the station ID is more than the last station ID" do
+      last_station_id_plus_five = @response.get_last_station + 5
+      expect { @response.station_info(last_station_id_plus_five) }.to raise_error
     end
   end
 
