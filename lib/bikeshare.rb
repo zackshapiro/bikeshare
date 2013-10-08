@@ -1,5 +1,7 @@
 class BikeShare
 
+  FIRST_STATION_ID = 2
+
   def initialize
     response = JSON.parse(open("http://bayareabikeshare.com/stations/json").read)
     @response = response["stationBeanList"]
@@ -9,17 +11,13 @@ class BikeShare
     @response.last["id"]
   end
 
-  def between?(min, max)
-    (min >= 2 && max <= get_last_station) ? true : false
-  end
-
   def station_info(station_id)
-    if station_id.between?(2, get_last_station)
-      station = @response.select { |station| station["id"] == station_id } 
-      station.first
-    else
-      raise "Please enter a station id in between 2 and #{last_station}"
-    end
+    
+    check_valid_station_id! station_id
+
+    station = @response.select { |station| station["id"] == station_id } 
+    station.first
+    
   end
 
   def stations(*city_name)
@@ -37,62 +35,77 @@ class BikeShare
   end
 
   def empty?(station_id)
-    if station_id.between?(2, get_last_station)
-      station = @response.select { |station| station["id"] == station_id }
+    
+    check_valid_station_id! station_id
 
-      station.first["availableBikes"] == 0 ? true : false
-    else
-      raise "Please enter a station id in between 2 and #{last_station}"
-    end
+    station = @response.select { |station| station["id"] == station_id }
+
+    station.first["availableBikes"] == 0 ? true : false
+    
   end
 
   def full?(station_id)
-    if station_id.between?(2, get_last_station)
-      station = @response.select { |station| station["id"] == station_id }
+    
+    check_valid_station_id! station_id
 
-      station.first["availableBikes"] == station.first["totalDocks"] ? true : false
-    else
-      raise "Please enter a station id in between 2 and #{last_station}"
-    end
+    station = @response.select { |station| station["id"] == station_id }
+
+    station.first["availableBikes"] == station.first["totalDocks"] ? true : false
+    
   end
 
   def available_bikes(station_id)
-    if station_id.between?(2, get_last_station)
-      station = @response.select { |station| station["id"] == station_id }
+    
+    check_valid_station_id! station_id
 
-      station.first["availableBikes"]
-    else
-      raise "Please enter a station id in between 2 and #{last_station}"
-    end
+    station = @response.select { |station| station["id"] == station_id }
+
+    station.first["availableBikes"]
   end
 
   def total_docks(station_id)
-    if station_id.between?(2, get_last_station)
-      station = @response.select { |station| station["id"] == station_id }
-      station.first["totalDocks"]
-    else
-      raise "Please enter a station id in between 2 and #{last_station}"
-    end
+    
+    check_valid_station_id! station_id
+
+    station = @response.select { |station| station["id"] == station_id }
+    station.first["totalDocks"]
+    
   end
 
   def percent_available(station_id)
-    if station_id.between?(2, get_last_station)
-      station = @response.select { |station| station["id"] == station_id }
+    
+    check_valid_station_id! station_id
 
-      available = (station.first["availableBikes"]).to_f
-      total = (station.first["totalDocks"]).to_f
+    station = @response.select { |station| station["id"] == station_id }
 
-      percentage = (available * 100.0) / total
-      percentage.round(2)
-    else 
-      raise "Please enter a station id in between 2 and #{last_station}"
-    end
+    available = (station.first["availableBikes"]).to_f
+    total = (station.first["totalDocks"]).to_f
+
+    percentage = (available * 100.0) / total
+    percentage.round(2)
+    
   end
 
   def offline_stations
     list = @response.select { |station| station["statusKey"] == 0 }
 
     list.empty? ? [] : list
+  end
+
+private
+  
+  # Checks if a station ID is included in the range of stations retrieved from bayareabikeshare.com
+  # Options:
+  # => first: The minimum id on the range to be checked. Defaults to the value of the first station id
+  # => last: The maximum id of the range to the be checked. Defaults to the last id of the response
+  # => message: The message of the exception that will be raised if the station id is not included in the range.
+  #
+  def check_valid_station_id! station_id, opts = {}
+
+    opts = opts.merge(:first => FIRST_STATION_ID, :last => get_last_station).merge(:message => "Please enter a station id in between #{opts[:first]} and #{opts[:last]}")
+
+    raise opts[:message] unless station_id.between? opts[:first], opts[:last]
+
   end
 
 end
