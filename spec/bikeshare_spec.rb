@@ -31,8 +31,8 @@ describe BikeShare do
     end
 
     it "should throw an exception if the station ID is more than the last station ID" do
-      last_station_id_plus_five = @response.get_last_station + 5
-      expect { @response.station_info(last_station_id_plus_five) }.to raise_error
+      bad_station = @response.get_last_station + 5
+      expect { @response.station_info(bad_station) }.to raise_error
     end
   end
 
