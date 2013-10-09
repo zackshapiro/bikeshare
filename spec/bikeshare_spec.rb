@@ -160,15 +160,32 @@ describe BikeShare do
   end
 
   describe "offline_stations" do
-    it "should return an empty array if no stations are offline" do
-      @response.offline_stations.should == []
-    end
+    it "should return an empty array if no stations are offline"
 
     it "should return an array of stations if one or more are offline" do
-      response = BikeShare.any_instance.stub(:offline_stations).and_return([{ :id => 2, :statusKey => 0}, { :id => 8, :statusKey => 0}])
-      response.is_a? Array
-      response.should_not be_nil
+      @response.offline_stations.should_not be_nil
     end
+  end
+
+  describe "#lat_and_long" do
+    it "should raise an error with a bad station id" do
+      expect { @response.percent_available(0) }.to raise_error
+    end
+
+    it "should raise an error with no station id" do
+      expect { @response.percent_available }.to raise_error
+    end
+
+    it "should return the lat and long of that station" do
+      station = @response.station_info(9)
+      lat = station["latitude"]
+      long = station["longitude"]
+
+      geo_array = @response.lat_and_long(9)
+      geo_array[0].should == lat
+      geo_array[1].should == long
+    end
+
   end
 
 end

@@ -81,6 +81,17 @@ class BikeShare
     list.empty? ? [] : list
   end
 
+  def lat_and_long(station_id)
+    check_valid_station_id!(station_id)
+
+    station = @response.select { |station| station["id"] == station_id }
+
+    lat = station.first["latitude"]
+    long = station.first["longitude"]
+
+    [lat, long]
+  end
+
 private
   
   def check_valid_station_id!(station_id)
