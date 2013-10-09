@@ -83,17 +83,11 @@ class BikeShare
 
 private
   
-  def check_valid_station_id!(station_id, opts = {})
-  # Checks if a station ID is included in the range of stations retrieved from bayareabikeshare.com
-  # Options:
-  # => first: The min id to be checked. Defaults to value of the first station id
-  # => last: The max id to be checked. Defaults to last id of the response
-  # => message: The message of the exception that will be raised if the station id is not included in the range.
+  def check_valid_station_id!(station_id)
+    first = FIRST_STATION_ID
+    last = get_last_station
 
-    opts = opts.merge(:first => FIRST_STATION_ID, :last => get_last_station)
-    opts = opts.merge(:message => "Please enter a station id in between #{opts[:first]} and #{opts[:last]}")
-
-    raise opts[:message] unless station_id.between?(opts[:first], opts[:last])
+    raise "Please enter a station id in between #{first} and #{last}" unless station_id.between?(first, last)
   end
 
 end
