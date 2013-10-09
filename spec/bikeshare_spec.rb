@@ -103,8 +103,7 @@ describe BikeShare do
     end
 
     it "should return true if there are no bikes" do
-      BikeShare.any_instance.stub(:empty?).and_return true
-      @response.empty?(3).should be_true
+      @response.empty?(4).should be_true
     end
 
     it "should return false if there are 1 or more bikes" do
