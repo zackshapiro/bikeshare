@@ -168,14 +168,6 @@ describe BikeShare do
   end
 
   describe "#lat_and_long" do
-    it "should raise an error with a bad station id" do
-      expect { @response.percent_available(0) }.to raise_error
-    end
-
-    it "should raise an error with no station id" do
-      expect { @response.percent_available }.to raise_error
-    end
-
     it "should return the lat and long of that station" do
       station = @response.station_info(9)
       lat = station["latitude"]
@@ -185,7 +177,6 @@ describe BikeShare do
       geo_array[0].should == lat
       geo_array[1].should == long
     end
-
   end
 
 end
