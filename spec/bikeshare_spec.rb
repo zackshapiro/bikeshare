@@ -9,8 +9,13 @@ describe BikeShare do
   end
   
   describe "initialization" do
-    it "should create a new BikeShare class" do
+    it "should create a new instance of the BikeShare class" do
       @response.should_not == nil
+    end
+
+    it "should accept a url to pull data from and create a new instance of the BikeShare class" do
+      offline_stations_url_response = BikeShare.new("http://bayareabikeshare.com/stations/json_with_offline_stations")
+      offline_stations_url_response.should_not == nil
     end
   end
 
@@ -160,10 +165,15 @@ describe BikeShare do
   end
 
   describe "offline_stations" do
-    it "should return an empty array if no stations are offline"
+    it "should return an empty array if no stations are offline" do
+      @response.offline_stations.is_a? Array
+      @response.offline_stations.count.should == 0
+    end
 
     it "should return an array of stations if one or more are offline" do
-      @response.offline_stations.should_not be_nil
+      response_with_offline_stations = BikeShare.new("http://bayareabikeshare.com/stations/json_with_offline_stations")
+      response_with_offline_stations.offline_stations.is_a? Array
+      response_with_offline_stations.offline_stations.count.should == 1
     end
   end
 

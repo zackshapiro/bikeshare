@@ -1,6 +1,4 @@
-uri = "http://bayareabikeshare.com/stations/json"
-
-json_response = '{
+{
    "executionTime":"2013-10-08 02:10:01 PM",
    "stationBeanList":[
       {
@@ -591,7 +589,7 @@ json_response = '{
          "latitude":37.4256839,
          "longitude":-122.1377775,
          "statusValue":"In Service",
-         "statusKey":0,
+         "statusKey":1,
          "availableBikes":7,
          "stAddress1":"Park at Olive",
          "stAddress2":"Park Boulevard",
@@ -1284,6 +1282,4 @@ json_response = '{
          "landMark":"San Francisco"
       }
    ]
-}'
-
-FakeWeb.register_uri(:get, uri, :body => json_response)
+}
