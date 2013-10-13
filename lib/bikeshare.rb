@@ -1,9 +1,12 @@
 class BikeShare
 
   FIRST_STATION_ID = 2
+  BAY_AREA_BIKE_JSON_URL = "http://bayareabikeshare.com/stations/json"
 
-  def initialize
-    response = JSON.parse(open("http://bayareabikeshare.com/stations/json").read)
+  def initialize url = nil
+    response_url = url || BAY_AREA_BIKE_JSON_URL
+
+    response = JSON.parse(open(response_url).read)
     @response = response["stationBeanList"]
   end
 
@@ -79,6 +82,17 @@ class BikeShare
     list = @response.select { |station| station["statusKey"] == 0 }
 
     list.empty? ? [] : list
+  end
+
+  def lat_and_long(station_id)
+    check_valid_station_id!(station_id)
+
+    station = @response.select { |station| station["id"] == station_id }
+
+    lat = station.first["latitude"]
+    long = station.first["longitude"]
+
+    [lat, long]
   end
 
 private
