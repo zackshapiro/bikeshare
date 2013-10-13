@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'bikeshare'
-  s.version     = '0.0.65'
-  s.date        = '2013-10-06'
-  s.summary     = "A Ruby wrapper for Bay Area Bike Share station information"
-  s.description = "Ditto"
+  s.version     = '0.0.7'
+  s.date        = '2013-10-12'
+  s.summary     = "A Ruby wrapper for Bay Area Bike Share bike and station information."
+  s.description = "A Ruby wrapper for Bay Area Bike Share bike and station information."
   s.authors     = ["Zack Shapiro"]
   s.email       = 'zack@zackshapiro.com'
   s.files       = ["lib/bikeshare.rb"]
