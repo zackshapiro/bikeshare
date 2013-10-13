@@ -10,18 +10,18 @@ describe BikeShare do
   
   describe "initialization" do
     it "should create a new instance of the BikeShare class" do
-      @response.should_not == nil
+      @response.should_not be_nil
     end
 
     it "should accept a url to pull data from and create a new instance of the BikeShare class" do
       offline_stations_url_response = BikeShare.new("http://bayareabikeshare.com/stations/json_with_offline_stations")
-      offline_stations_url_response.should_not == nil
+      offline_stations_url_response.should_not be_nil
     end
   end
 
   describe "#last_station" do
     it "should return the last station's id" do
-      @response.get_last_station.should_not == nil
+      @response.get_last_station.should_not be_nil
     end
 
     it "should return 77 for the last station's id" do
@@ -45,8 +45,8 @@ describe BikeShare do
     it "should return the information for a single station if valid" do
       station = @response.station_info(9)
       station.should_not be_nil
-      station.is_a? Hash
-      station["id"] == 2
+      station.should be_an_instance_of(Hash)
+      station["id"].should == 9
     end
 
     it "should return an error if invalid" do
@@ -69,11 +69,11 @@ describe BikeShare do
     end
 
     it "should return an empty array with improperly capitalized info" do
-      @response.stations("san francisco").should == []
+      @response.stations("san francisco").should be_empty
     end
 
     it "should return an empty array with bad info" do
-      @response.stations("baltimore").should == []
+      @response.stations("baltimore").should be_empty
     end
   end
 
@@ -89,7 +89,7 @@ describe BikeShare do
       station2 = @response.station_info(8)
       stations = [ station1, station2 ]
       empties = @response.stub(:empty_stations).and_return(stations)
-      empties.is_a? Array
+      empties.should be_nil
     end
   end
 
@@ -159,20 +159,20 @@ describe BikeShare do
     end
 
     it "should return the percentage of bikes available" do
-      @response.percent_available(7).is_a? Float
+      @response.percent_available(7).should be_an_instance_of(Float)
       @response.percent_available(7).should >= 0.0
     end
   end
 
   describe "offline_stations" do
     it "should return an empty array if no stations are offline" do
-      @response.offline_stations.is_a? Array
-      @response.offline_stations.count.should == 0
+      @response.offline_stations.should be_an_instance_of(Array)
+      @response.offline_stations.should be_empty
     end
 
     it "should return an array of stations if one or more are offline" do
       response_with_offline_stations = BikeShare.new("http://bayareabikeshare.com/stations/json_with_offline_stations")
-      response_with_offline_stations.offline_stations.is_a? Array
+      response_with_offline_stations.offline_stations.should be_an_instance_of(Array)
       response_with_offline_stations.offline_stations.count.should == 1
     end
   end
