@@ -10,7 +10,7 @@ class BikeShare
     @response = response["stationBeanList"]
   end
 
-  def get_last_station
+  def last_station_id
     @response.last["id"]
   end
 
@@ -99,7 +99,7 @@ private
   
   def check_valid_station_id!(station_id)
     first = FIRST_STATION_ID
-    last = get_last_station
+    last = last_station_id
 
     raise "Please enter a station id in between #{first} and #{last}" unless station_id.between?(first, last)
   end
