@@ -3,7 +3,7 @@ class BikeShare
   FIRST_STATION_ID = 2
   BAY_AREA_BIKE_JSON_URL = "http://bayareabikeshare.com/stations/json"
 
-  def initialize url = nil
+  def initialize(url = nil)
     response_url = url || BAY_AREA_BIKE_JSON_URL
 
     response = JSON.parse(open(response_url).read)
