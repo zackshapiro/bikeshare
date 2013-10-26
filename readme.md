@@ -24,7 +24,7 @@ Returns the full JSON of stations available and their information
 
 
 ```ruby
-response.get_last_station
+response.last_station_id
 ```
 Will return an integer of the last station in the system
 

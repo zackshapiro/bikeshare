@@ -3,14 +3,14 @@ class BikeShare
   FIRST_STATION_ID = 2
   BAY_AREA_BIKE_JSON_URL = "http://bayareabikeshare.com/stations/json"
 
-  def initialize url = nil
+  def initialize(url = nil)
     response_url = url || BAY_AREA_BIKE_JSON_URL
 
     response = JSON.parse(open(response_url).read)
     @response = response["stationBeanList"]
   end
 
-  def get_last_station
+  def last_station_id
     @response.last["id"]
   end
 
@@ -99,7 +99,7 @@ private
   
   def check_valid_station_id!(station_id)
     first = FIRST_STATION_ID
-    last = get_last_station
+    last = last_station_id
 
     raise "Please enter a station id in between #{first} and #{last}" unless station_id.between?(first, last)
   end

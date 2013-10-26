@@ -19,13 +19,13 @@ describe BikeShare do
     end
   end
 
-  describe "#last_station" do
+  describe "#last_station_id" do
     it "should return the last station's id" do
-      @response.get_last_station.should_not be_nil
+      @response.last_station_id.should_not be_nil
     end
 
     it "should return 77 for the last station's id" do
-      @response.get_last_station.should == 77
+      @response.last_station_id.should == 77
     end
   end
 
@@ -36,7 +36,7 @@ describe BikeShare do
     end
 
     it "should throw an exception if the station ID is more than the last station ID" do
-      bad_station = @response.get_last_station + 5
+      bad_station = @response.last_station_id + 5
       expect { @response.station_info(bad_station) }.to raise_error
     end
   end
