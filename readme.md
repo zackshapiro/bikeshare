@@ -79,3 +79,5 @@ Returns an array of stations currently offline
 * If you would like to contribute, fork this repo, create a new branch with your changes and submit a pull request!
 
 * If you have any questions, I'm [@ZackShapiro](http://twitter.com/zackshapiro) on Twitter.
+
+Bikeshare is open source, and made available under the [MIT License](http://opensource.org/licenses/mit-license.php). Distribute, use as-is, or modify to your liking in personal and commercial projects.
